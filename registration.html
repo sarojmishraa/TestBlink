@@ -1,0 +1,451 @@
+<script>
+  document.addEventListener("RESOURCES_LOADED", function (e) {
+    initContactUs();
+  });
+  if (window.themeResourceLoaded) {
+    initContactUs();
+  }
+
+  function validateForm($form) {
+    let isValid = true;
+    $form.find(".error-message").remove();
+    const nameField = $form.find("input[name='name']");
+    const designationField = $form.find("input[name='designation']");
+    const companyField = $form.find("input[name='company']");
+    const cityField = $form.find("input[name='city']");
+    const phoneField = $form.find("input[name='phone']");
+    const emailField = $form.find("input[name='email']");
+    const introductionFeild = $form.find("textarea[name='comments']");
+    const budgetField = $form.find("input[name='budget']"); 
+    const requiredFields = $form.find("input[required], textarea[required], input[type='checkbox'][required]");
+    requiredFields.each(function () {
+      if (!$(this).val() && !$(this).prop('checked')) {
+        $(this).after('<div class="error-message" style="color: red; font-size: 0.875em;">This field is required.</div>');
+        isValid = false;
+      }
+    });
+    if (!nameField.val()) {
+      nameField.after('<div class="error-message" style="color: red; font-size: 0.875em;">Name is required.</div>');
+      isValid = false;
+    }
+    if (!designationField.val()) {
+      designationField.after('<div class="error-message" style="color: red; font-size: 0.875em;">Name is required.</div>');
+      isValid = false;
+    }
+    if (!companyField.val()) {
+      companyField.after('<div class="error-message" style="color: red; font-size: 0.875em;">Name is required.</div>');
+      isValid = false;
+    }
+    if (!cityField.val()) {
+      cityField.after('<div class="error-message" style="color: red; font-size: 0.875em;">Name is required.</div>');
+      isValid = false;
+    }
+    if (!budgetField.val()) {
+      budgetField.after('<div class="error-message" style="color: red; font-size: 0.875em;">Name is required.</div>');
+      isValid = false;
+    }
+    if (!introductionFeild.val()) {
+      introductionFeild.after('<div class="error-message" style="color: red; font-size: 0.875em;">Comment is required.</div>');
+      isValid = false;
+    }
+    const emailValue = emailField.val();
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailValue) {
+      emailField.after('<div class="error-message" style="color: red; font-size: 0.875em;">Email is required.</div>');
+      isValid = false;
+    } else if (!emailPattern.test(emailValue)) {
+      emailField.after('<div class="error-message" style="color: red; font-size: 0.875em;">Please enter a valid email address.</div>');
+      isValid = false;
+    }
+    const phoneValue = phoneField.val();
+    const phonePattern = /^[0-9]{1,10}$/;
+    if (!phoneValue) {
+      phoneField.after('<div class="error-message" style="color: red; font-size: 0.875em;">Phone number is required.</div>');
+      isValid = false;
+    } else if (!phonePattern.test(phoneValue)) {
+      phoneField.after('<div class="error-message" style="color: red; font-size: 0.875em;">Phone number must be numeric and less than 10 digits.</div>');
+      isValid = false;
+    }
+    return isValid;
+  }
+
+  function initContactUs() {
+    $(".js-btn-submit-contact").on("click", function () {
+      const $form = $('#getInTouchForm');
+      if (validateForm($form)) {
+        $.ajax({
+          url: "/ContentCreator",
+          type: 'post',
+          dataType: 'application/json',
+          headers: {
+            's-id': "phookBpD1HBcPZtWSWfVUTo7UWegZ5fBWcDPsTZMVukfpgCvZTNm81EZAY8shdN1"
+          },
+          data: $form.serialize(),
+          success: function (data) {
+            $form.html('<div class="thankyou">Thank you for your message.</div>');
+          },
+          error: function (data) {
+            $form.html('<div class="thankyou">There was an error. Please try again later.</div>');
+          },
+          complete: function (data) {
+            $form.html('<div class="thankyou">Thank you for your message.</div>');
+          }
+        });
+      }
+    });
+  }
+
+</script>
+<style>
+  .intro {
+    text-wrap: nowrap;
+  }
+
+  .thankyou {
+    font-size: 24px;
+    text-align: center;
+  }
+
+  @media (min-width: 320px) and (max-width: 767px) {
+    
+
+    .form-top-container {
+      margin-bottom: 20px;
+      padding-left: 10px !important;
+      padding-right: 10px !important;
+    }
+  }
+
+  .primary-btn-submit {
+    max-width: 200px !important;
+  }
+
+  .row-duplicate {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  .form-top-container {
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: black;
+    color: white;
+  }
+
+  .container-div-css {
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+  }
+
+  .form-control {
+    background-color: #333;
+    border: 1px solid #555;
+    color: white;
+    width: 100%;
+    border-radius: 0.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .form-control:focus {
+    background-color: #444;
+    color: white;
+    outline: none;
+  }
+
+  .primary-btn-submit {
+    font-weight: 600;
+    font-size: 20px;
+    text-align: center;
+    width: 201px;
+    height: 55px;
+    background-color: #9cf;
+    color: black;
+    font-weight: bold;
+    border-radius: 20px;
+    margin-top: 1.5rem;
+  }
+
+  .primary-btn-submit:hover {
+    background-color: rgb(24, 24, 24);
+    color: rgb(238, 235, 235);
+    border: 2px solid #9cf;
+  }
+
+  .fw-semibold {
+    font-size: 20px;
+    padding-bottom: 3px;
+    margin-left: 2px;
+    font-weight: 400;
+  }
+
+  sup {
+    color: red;
+  }
+
+  .column-main-css {
+    margin-top: 1.5rem;
+    width: 100%;
+    padding: 0 15px;
+    box-sizing: border-box;
+  }
+
+  .top-img {
+    margin-bottom: 2.5rem;
+    text-align: center;
+  }
+
+  .row-duplicate {
+    display: flex;
+    flex-wrap: wrap;
+    margin: -15px;
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  .heading-css {
+    margin-bottom: 1.5rem;
+  }
+
+  .submit-button-div {
+    margin-top: 1.5rem;
+  }
+
+  .rounded-input {
+    border-radius: 0.3rem;
+  }
+
+  .pyi-2 {
+    line-height: 2;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .pxl-4 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .border-submit {
+    border: none;
+  }
+
+  .img-fluid {
+    max-width: 100%;
+    height: auto;
+  }
+
+  @media (min-width: 576px) {
+
+    .column-main-css {
+      width: 49%;
+    }
+  }
+
+  @media (max-width: 575.98px) {
+    .primary-btn-submit {
+      width: 100%;
+    }
+
+    .fw-semibold {
+      font-size: 18px;
+    }
+
+    h1 {
+      font-size: 24px;
+    }
+  }
+
+  @media (max-width: 767.98px) {
+    .row.row-duplicate {
+  margin: 0px 3px 0px 3px;
+}
+    .row-duplicate .contact-crazytales {
+      margin-left: 20px;
+      margin-right: 20px;
+      max-width: 90%;
+     
+    }
+    .form-top-container {
+      margin-bottom: 20px;
+      padding: 10px;
+    }
+
+    .container-div-css {
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .form-top-container {
+      margin-bottom: 20px;
+      max-width: 850px;
+    }
+  }
+
+  .level-input {
+    color: rgb(207, 205, 205) !important;
+  }
+
+  .input-color {
+    margin-top: 5px;
+    background: #333333 !important;
+  }
+
+  .input-color-text-area {
+    
+    background: #333333 !important;
+    margin-top: 5px;
+  }
+
+  @media(min-width:1024px) {
+    .input-color-text-area {
+      min-height: 60px;
+      min-width: 200px;
+      max-width: 390px;
+
+      .budget {
+        min-height: 50px;
+      }
+    }
+  }
+
+  @media(max-width:767px) {
+    .input-color-text-area {
+      min-height: 50px;
+      min-width: 50px;
+      max-width: 100%;
+    }
+
+  }
+
+  .budget {
+    margin-top: 3px;
+    min-height: 40px;
+    min-width: 100px;
+  }
+
+  .contact-crazytales {
+    justify-items: center;
+    border: 1px solid #555;
+    border-radius: 20px;
+  }
+
+  .contact-crazyta {
+    margin-top: 80px;
+  }
+  .mail-crazytales{
+    background-color: black;
+    color:rgba(52, 93, 255, 0.531);
+    
+  }
+  .heading-crazytales{
+    color: rgb(223, 223, 223);
+  }
+  .contact-crazytales a{
+    font-size: 18px;
+    text-decoration: none;
+  }
+  .contact-crazytales {
+
+    margin-left: 29px;
+    max-width: 45%;
+    padding-right: 30px;
+  }
+</style>
+  <div class="container form-top-container container-div-css">
+    <div class="top-img">
+      <img src="https://thecrazytales.com/h-upload/2025/02/19/1404870-img.webp" alt="logo" class="img-fluid">
+    
+    </div>
+    <h1 class="text-center heading-css">
+      REGISTER <span style="color: #9cf">NOW</span>
+    </h1>
+    <form name="getInTouchForm" id="getInTouchForm">
+      <input type="hidden" name="form_name" id="form_name" value="registration">
+      
+      <div class="row row-duplicate">
+        <div class="col-6 column-main-css">
+          <label for="Name" class="fw-semibold level-input">Name<sup>*</sup></label>
+          <input type="text" name="name" id="name" class="form-control pyi-2 rounded-input input-color" required=""
+            autocomplete="off" />
+        </div>
+        <div class="col-6 column-main-css">
+          <label for="Designation" class="fw-semibold level-input">Designation<sup>*</sup></label>
+          <input type="text" name="designation" id="designation" class="form-control pyi-2 rounded-input input-color"
+            required="" autocomplete="off" />
+        </div>
+      </div>
+      <div class="row row-duplicate">
+        <div class="col-6 column-main-css">
+          <label for="Company" class="fw-semibold level-input">Company<sup>*</sup></label>
+          <input type="text" name="company" id="company" class="form-control pyi-2 rounded-input input-color"
+            required="" autocomplete="off" />
+        </div>
+        <div class="col-6 column-main-css">
+          <label for="City" class="fw-semibold level-input">City<sup>*</sup></label>
+          <input type="text" name="city" id="city" class="form-control pyi-2 rounded-input input-color" required=""
+            autocomplete="off" />
+        </div>
+      </div>
+      <div class="row row-duplicate">
+        <div class="col-6 column-main-css">
+          <label for="Phone" class="fw-semibold level-input">Mobile No<sup>*</sup></label>
+          <input type="tel" name="phone" id="phone" class="form-control pyi-2 rounded-input input-color" required=""
+            autocomplete="off" />
+        </div>
+        <div class="col-6 column-main-css">
+          <label for="Email" class="fw-semibold level-input">Email ID <sup>*</sup></label>
+          <input type="email" name="email" id="email" class="form-control pyi-2 rounded-input input-color" required=""
+            autocomplete="off" />
+        </div>
+      </div>
+      <div class="row row-duplicate">
+        <div class="col-6 column-main-css">
+          <label for="text" class="fw-semibold level-input intro">Brief introduction about yourself<sup>*</sup></label>
+          <textarea rows="4" cols="50" name="comments" id="comments" class="input-color-text-area"
+            placeholder="Enter your introduction" required=""> </textarea>
+
+        </div>
+        <div class="col-6 column-main-css">
+          <label for="text" class="fw-semibold level-input intro">Do you want to promote your brand/ <br>Hospital And
+            Your Budget ?<sup>*</sup></label>
+          <br>
+          <input type="number" name="budget" id="budget" class="form-control pyi-2 rounded-input input-color"
+            required=""/>
+        </div>
+      </div>
+      <div class="text-center submit-button-div"> <input type="submit" value="Submit"
+          class="js-btn-submit-contact btn primary-btn-submit  wpcf7-submit">
+      </div>
+      </form>
+
+      <div class="contact-crazyta">
+        <h1 class="text-center heading-css">
+          CONTACT <span style="color: #9cf">US</span>
+        </h1>
+        <div class="row row-duplicate">
+          <div class="col-6 column-main-css contact-crazytales">
+            <h3>
+              <span class="heading-crazytales">For sponsorship and exhibition opportunities, please contact</span>
+              <br>
+            </h3>
+            <p>
+              <a href="mailto:team@thecrazytales.com"> <span class="mail-crazytales">team@thecrazytales.com</span> </a><br>
+            </p>
+          </div>
+          <div class="col-6 column-main-css contact-crazytales">
+            <h3>
+              <span class="heading-crazytales">if you want to require any creative from our side .Please let us
+                know.</span> <br>
+            </h3>
+            <p>
+              <a href="mailto:thecrazytale@gmail.com"><span class="mail-crazytales">thecrazytale@gmail.com</span></a> <br>
+         </p>
+          </div>
+        </div>
+      </div>
+  </div>

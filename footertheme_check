@@ -1,0 +1,84 @@
+<div class="container">
+  <div class="pdt25">
+    <div class="row">
+      <div class="col-sm-3">
+        <div class="menu-about-healthcheck-footer-container">
+
+          <ul class="footer_menu">
+            <li>
+              <a href="/">Home</a>
+            </li>
+            <li>
+              <a href="/aboutus"> About Us</a></h4>
+            </li>
+            <li>
+              <a href="/contactus"> Contact Us</a>
+            </li>
+            <li>
+              <a href="/all-authors">All Authors</a>
+            </li>
+            <li>
+              <a href="/all-categories">All Categories</a>
+            </li>
+            <li>
+              <a href="/admin">Report News</a>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="menu-about-healthcheck-footer-container">
+          <div id="trending_tags_in_footer"></div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <section class="health-ft-social-subscribe-box">
+          <div>
+            <h2 class="health-ft-logo"> <a href="/" aria-label="logo"> <img src="/images/logo.png" alt="healthcheck"></a> </h2>
+          </div>
+          <ul class="list-inline">
+            <li class="list-inline-item"> <a href="https://www.facebook.com/hocalwire" target="_blank" aria-label="facebook"><i class="icon-facebook"></i></a> </li>
+
+            <li class="list-inline-item"> <a href="https://www.youtube.com/channel/UCZqVaooi2B-K9uelkjBWOcw" target="_blank" aria-label="youtube"><i class="icon-youtube-play"></i></a> </li>
+
+            <li class="list-inline-item"> <a href="https://twitter.com/hocalwire" target="_blank" aria-label="twitter"><i class="icon-twitter"></i></a> </li>
+
+            <li class="list-inline-item"> <a href="https://www.linkedin.com/company/hocalwire" target="_blank" aria-label="linkedin">
+
+                <i class="fa-brands fa-instagram">
+
+                </i>
+
+              </a> </li>
+
+          </ul>
+          <div>
+            <div id="trending_tags_in_footer"></div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+  <div class="divider newdivider"></div>
+  <div class="row">
+    <div class="col-sm-6 copyright text-xs-center">
+      <p>Copyright @ 2025 <a href="/">Theme Check.</a></p>
+    </div>
+    <div class="col-sm-6 col-xs-12 copyright text-md-right text-xs-center">
+      <p>Powered by <a href="https://www.hocalwire.com/">Hocalwire.com</a></p>
+    </div>
+  </div>
+</div>
+
+<style>
+  .list-inline {
+    border: 1px solid;
+    margin-top: 10px;
+  }
+
+  .health-ft-social-subscribe-box .list-inline>li {
+    padding-top: 5px;
+    list-style: none;
+  }
+</style>
